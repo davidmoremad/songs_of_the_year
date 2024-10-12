@@ -2,13 +2,13 @@
 import { songs } from '../data/songs.js';
 ---
 
-<div class="game-container bg-surface rounded-lg p-8 shadow-xl">
+
+<div class="game-container rounded-lg p-8 shadow-xl bg-primary bg-opacity-20 border-solid border-2 border-primary">
   <div class="header flex justify-between items-center mb-6">
     <div id="songInfo" class="text-2xl font-semibold"></div>
   </div>
   
-  <!-- <audio id="audioPlayer" controls class="w-full mb-6"></audio> -->
-  <iframe id="audioPlayer" class="w-full mb-6" width="560" height="315" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  <iframe id="audioPlayer" class="w-full mb-6" width="100%" height="400" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
   
   <div class="flex justify-between mb-6">
     <button id="showDateButton" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Show Date</button>
@@ -17,7 +17,7 @@ import { songs } from '../data/songs.js';
   <div id="result" class="text-xl mb-6 text-center"></div>
 </div>
 
-<div class="spreadsheet-container bg-surface rounded-lg p-8 mt-12 shadow-xl">
+<div class="spreadsheet-container bg-primary bg-opacity-20 rounded-lg p-8 mt-12 shadow-xl border-solid border-2 border-primary">
   <div class="scoreboard-header flex justify-between items-center mb-6">
     <h2 class="text-5xl font-semibold">Scoreboard</h2>
     <button id="settingsButton" class="text-3xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">⚙️</button>
@@ -41,13 +41,14 @@ import { songs } from '../data/songs.js';
   </div>
 </div>
 
-<div id="playerSettings" class="modal hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full">
-  <div class="modal-content bg-surface p-8 rounded-lg shadow-xl max-w-md mx-auto mt-20">
+<div id="playerSettings" class="modal hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full ">
+  <div class="modal-content p-8 rounded-lg shadow-xl max-w-md mx-auto mt-20 bg-primary bg-opacity-20 backdrop-filter backdrop-blur-lg border-solid border-2 border-primary">
     <h2 class="text-2xl font-semibold mb-4">Player Settings</h2>
     <div id="playerList" class="mb-4"></div>
     <div class="flex justify-between">
-      <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Add Player</button>
-      <button id="closeSettings" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded transition duration-300">Close</button>
+      <input type="text" id="newPlayerName" placeholder="Nombre del jugador" class="flex-grow mr-2 p-2 mr-2 rounded bg-gray-700 text-white">
+      <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Add</button>
+      <button id="closeSettings" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 ml-2 rounded transition duration-300">Close</button>
     </div>
   </div>
 </div>
@@ -63,11 +64,10 @@ import { songs } from '../data/songs.js';
     { name: "David", avatar: "🐼", totalPoints: 0 }
   ];
 
-  const animalAvatars = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐙", "🐵"];
+  const animalAvatars = ["🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐨", "🐯", "🦁", "🐮", "🐷", "🐸", "🐙", "🐵", "🐴", "🦄"];
 
   function loadRandomSong() {
     currentSong = songs[Math.floor(Math.random() * songs.length)];
-    //document.getElementById('songInfo').textContent = `${currentSong.title} by ${currentSong.artist}`;
     document.getElementById('songInfo').innerHTML = `<b>${currentSong.title}</b> <span class="font-thin text-gray-400">by</span> <b>${currentSong.artist}</b>`;
     document.getElementById('audioPlayer').src = currentSong.audio;
     document.getElementById('result').textContent = '';
@@ -153,7 +153,7 @@ import { songs } from '../data/songs.js';
   });
 
   document.getElementById('addPlayer').addEventListener('click', () => {
-    const newName = `Player ${players.length + 1}`;
+    const newName = document.getElementById('newPlayerName').value;
     const newAvatar = animalAvatars[Math.floor(Math.random() * animalAvatars.length)];
     players.push({ name: newName, avatar: newAvatar, totalPoints: 0 });
     updatePlayerList();
