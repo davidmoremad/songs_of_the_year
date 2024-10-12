@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Game from '../components/Game.astro';
+---
+
+<Layout title="Song of the Year">
+	<main class="container mx-auto px-4 py-8">
+		<h1 class="text-5xl font-bold text-center mb-8">
+			<span class="bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">Song of the Year</span>
+		</h1>
+		<p class="text-xl text-center mb-12 max-w-2xl mx-auto">
+			¿Cuanto sabes de música? ¿Sabrías decir el año en que salieron las canciones más conocidas? <b>¡Demuéstralo!</b>
+		</p>
+		<Game />
+	</main>
+</Layout>
