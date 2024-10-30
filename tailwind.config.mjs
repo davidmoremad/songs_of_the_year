@@ -10,9 +10,7 @@ export default {
         surface: "#1F2937",
         text: "#F3F4F6",
       },
-      fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-      },
+      fontFamily: {},
     },
   },
   plugins: [],

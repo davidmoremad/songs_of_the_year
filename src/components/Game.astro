@@ -3,54 +3,84 @@ import { songs } from '../data/songs.js';
 ---
 
 
-<div class="game-container rounded-lg p-8 shadow-xl bg-primary bg-opacity-20 border-solid border-2 border-primary">
-  <div class="header flex justify-between items-center mb-6">
-    <div id="songInfo" class="text-2xl font-semibold"></div>
-  </div>
-  
-  <iframe id="audioPlayer" class="w-full mb-6" width="100%" height="400" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
-  
-  <div class="flex justify-between mb-6">
-    <button id="showDateButton" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Show Date</button>
-    <button id="nextSongButton" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Next Song</button>
-  </div>
-  <div id="result" class="text-xl mb-6 text-center"></div>
-</div>
+ <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
-<div class="spreadsheet-container bg-primary bg-opacity-20 rounded-lg p-8 mt-12 shadow-xl border-solid border-2 border-primary">
-  <div class="scoreboard-header flex justify-between items-center mb-6">
-    <h2 class="text-5xl font-semibold">Scoreboard</h2>
-    <button id="settingsButton" class="text-3xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">⚙️</button>
+  <!-- SONG CARD -->
+  <div class="game-container rounded-lg p-8 shadow-xl bg-primary bg-opacity-20 border-solid border-2 border-primary">
+    <div class="header flex justify-between items-center mb-6 border-b-2 border-primary pb-6">
+      <div id="songInfo" class="text-3xl font-semibold title"></div>
+    </div>
+    
+    <iframe id="audioPlayer" class="w-full mb-6" width="100%" height="400" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    
+    <div class="flex justify-between mb-6">
+      <button id="showDateButton" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Show Date</button>
+      <button id="nextSongButton" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Next Song</button>
+    </div>
+    <div id="result" class="text-xl mb-6 text-center"></div>
   </div>
-  <div id="playerGuesses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
-  <div class="overflow-x-auto">
-    <table id="scoreTable" class="w-full">
-      <thead>
-        <tr class="bg-primary bg-opacity-20">
-          <th class="p-3 text-left">Round</th>
-          <th class="p-3 text-left">Song</th>
-          <th class="p-3 text-left">Player</th>
-          <th class="p-3 text-left">Guess</th>
-          <th class="p-3 text-left">Points</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Rows will be added dynamically -->
-      </tbody>
-    </table>
-  </div>
-</div>
 
-<div id="playerSettings" class="modal hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full ">
-  <div class="modal-content p-8 rounded-lg shadow-xl max-w-md mx-auto mt-20 bg-primary bg-opacity-20 backdrop-filter backdrop-blur-lg border-solid border-2 border-primary">
-    <h2 class="text-2xl font-semibold mb-4">Player Settings</h2>
-    <div id="playerList" class="mb-4"></div>
-    <div class="flex justify-between">
-      <input type="text" id="newPlayerName" placeholder="Nombre del jugador" class="flex-grow mr-2 p-2 mr-2 rounded bg-gray-700 text-white">
-      <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Add</button>
-      <button id="closeSettings" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 ml-2 rounded transition duration-300">Close</button>
+  <!-- SCOREBOARD -->
+  <div class="spreadsheet-container bg-primary bg-opacity-20 rounded-lg p-8 shadow-xl border-solid border-2 border-primary">
+
+    <div class="scoreboard-header flex justify-between items-center mb-6 border-b-2 border-primary pb-6">
+      <h2 class="text-3xl font-semibold title">Scoreboard</h2>
+      <button id="settingsButton" class="text-2xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">⚙️</button>
+    </div>
+
+    <div id="playerGuesses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
+
+    <div class="overflow-x-auto">
+      <table id="scoreTable" class="w-full h-72 overflow-hidden block border-collapse border border-primary">
+        <thead class="block">
+          <tr class="bg-primary bg-opacity-20 flex w-full border-b border-primary">
+            <th class="p-3 text-center flex-[2] border-r border-primary">Canción</th>
+            <th class="p-3 text-center flex-1 border-r border-primary">Jugador</th>
+            <th class="p-3 text-center flex-[0.5] border-r border-primary">Resp.</th>
+            <th class="p-3 text-center flex-[0.5]">Puntos</th>
+          </tr>
+        </thead>
+        <tbody class="block h-full overflow-y-auto">
+          <!-- More rows as needed -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Sum points per player -->
+    <!-- <div class="flex flex-wrap justify-center mt-8">
+      <div class="flex items-center m-6">
+        <span class="text-2xl">🐸</span>
+        <span class="text-xl font-semibold mx-2">Sergio</span>
+        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
+      </div>
+      <div class="flex items-center m-6">
+        <span class="text-2xl">🐸</span>
+        <span class="text-xl font-semibold mx-2">Sergio</span>
+        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
+      </div>
+      <div class="flex items-center m-6">
+        <span class="text-2xl">🐸</span>
+        <span class="text-xl font-semibold mx-2">Sergio</span>
+        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
+      </div>
+    </div> -->
+
+
+  </div>
+
+  <!-- PLAYERS MENU -->
+  <div id="playerSettings" class="modal hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
+    <div class="modal-content p-8 rounded-lg shadow-xl max-w-md mx-auto mt-20 bg-primary bg-opacity-20 backdrop-filter backdrop-blur-lg border-solid border-2 border-primary">
+      <h2 class="text-2xl font-semibold mb-4">Player Settings</h2>
+      <div id="playerList" class="mb-4"></div>
+      <div class="flex justify-between">
+        <input type="text" id="newPlayerName" placeholder="Nombre del jugador" class="flex-1 mr-2 p-2 mr-2 rounded bg-gray-700 text-white">
+        <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Add</button>
+        <button id="closeSettings" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 ml-2 rounded transition duration-300">Close</button>
+      </div>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -68,7 +98,7 @@ import { songs } from '../data/songs.js';
 
   function loadRandomSong() {
     currentSong = songs[Math.floor(Math.random() * songs.length)];
-    document.getElementById('songInfo').innerHTML = `<b>${currentSong.title}</b> <span class="font-thin text-gray-400">by</span> <b>${currentSong.artist}</b>`;
+    document.getElementById('songInfo').innerHTML = `<b>${currentSong.title}</b> <span class="text-gray-400"> — </span> <b>${currentSong.artist}</b>`;
     document.getElementById('audioPlayer').src = currentSong.audio;
     document.getElementById('result').textContent = '';
     document.getElementById('showDateButton').disabled = false;
@@ -80,14 +110,20 @@ import { songs } from '../data/songs.js';
     playerGuessesDiv.innerHTML = '';
     players.forEach((player, index) => {
       playerGuessesDiv.innerHTML += `
-        <div class="player-guess bg-surface-light p-4 rounded-lg shadow">
+        <div class="player-guess p-4 rounded-lg">
           <div class="player-info flex items-center mb-2">
             <span class="player-avatar text-3xl mr-2">${player.avatar}</span>
-            <span class="player-name font-semibold">${player.name}</span>
+            <span class="player-name text-xl font-semibold">${player.name}</span>
           </div>
           <div class="guess-input flex">
-            <input type="number" id="guess-${index}" placeholder="Enter guess" min="1900" max="2023" class="flex-grow mr-2 p-2 rounded bg-gray-700 text-white">
-            <button onclick="submitGuess(${index})" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Submit</button>
+            <input type="number" id="guess-${index}" placeholder="XXXX" min="1900" max="2023" class="flex-1 mr-2 p-2 rounded bg-gray-700 text-white">
+            <button onclick="submitGuess(${index})" class="bg-primary hover:bg-primary-dark text-white font-bold p-2 rounded transition duration-300">
+            
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+              
+            </button>
           </div>
         </div>
       `;
@@ -104,7 +140,7 @@ import { songs } from '../data/songs.js';
         document.getElementById('showDateButton').click();
       }
     } else {
-      alert('Please enter a valid year guess.');
+      alert('Introduce un año válido (1976).');
     }
   }
 
@@ -114,14 +150,17 @@ import { songs } from '../data/songs.js';
     player.totalPoints += points;
 
     const tbody = document.querySelector('#scoreTable tbody');
-    const newRow = tbody.insertRow();
+    const newRow = document.createElement('tr');
+    newRow.className = 'flex w-full border-b border-primary';
     newRow.innerHTML = `
-      <td class="p-3">${currentRound}</td>
-      <td class="p-3">${currentSong.title}</td>
-      <td class="p-3">${player.avatar} ${player.name}</td>
-      <td class="p-3">${guess}</td>
-      <td class="p-3">${points}</td>
+      <td class="p-3 text-left flex-[2] border-r border-primary">${currentSong.title.length > 25 ? currentSong.title.substring(0, 25) + '...' : currentSong.title}</td>
+      <td class="p-3 text-center flex-1 border-r border-primary">${player.avatar} ${player.name}</td>
+      <td class="p-3 text-center flex-[0.5] border-r border-primary">${guess}</td>
+      <td class="p-3 text-center flex-[0.5]">${points}</td>
     `;
+
+    // Prepend the new row to the tbody
+    tbody.insertBefore(newRow, tbody.firstChild);
 
     if (players.every(p => document.getElementById(`guess-${players.indexOf(p)}`).disabled)) {
       currentRound++;
@@ -181,4 +220,6 @@ import { songs } from '../data/songs.js';
 
   // Load the first song when the page loads
   loadRandomSong();
+
+  
 </script>

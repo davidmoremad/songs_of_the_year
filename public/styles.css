@@ -1,0 +1,20 @@
+/* Import montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap');
+
+/* Remove arrows on input type=number */
+@layer base {
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+}
+
+input {
+  outline: none;
+}
+
+.title{
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -2px;
+}
