@@ -1,5 +1,5 @@
 /* Import montserrat font */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400;600;700&display=swap');
 
 /* Remove arrows on input type=number */
 @layer base {
@@ -8,6 +8,22 @@
     -webkit-appearance: none;
     margin: 0;
   }
+}
+
+@layer utilities {
+  /* Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
 }
 
 input {

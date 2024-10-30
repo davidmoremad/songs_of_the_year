@@ -8,75 +8,62 @@ import { songs } from '../data/songs.js';
   <!-- SONG CARD -->
   <div class="game-container rounded-lg p-8 shadow-xl bg-primary bg-opacity-20 border-solid border-2 border-primary">
     <div class="header flex justify-between items-center mb-6 border-b-2 border-primary pb-6">
-      <div id="songInfo" class="text-3xl font-semibold title"></div>
+      <div id="songInfo" class="text-2xl lg:text-3xl font-bold title"></div>
     </div>
     
-    <iframe id="audioPlayer" class="w-full mb-6" width="100%" height="400" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
+    <iframe id="audioPlayer" class="w-full mb-6 h-52 lg:h-96" width="100%" src="https://www.youtube.com/embed/5qap5aO4i9A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"></iframe>
     
     <div class="flex justify-between mb-6">
-      <button id="showDateButton" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Show Date</button>
-      <button id="nextSongButton" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Next Song</button>
+      <button id="showDateButton" class="text-lg px-6 py-4 lg:py-2 lg:px-4 rounded bg-primary hover:bg-primary-dark text-white transition duration-300">Show Date</button>
+      <button id="nextSongButton" class="text-lg px-6 py-4 lg:py-2 lg:px-4 rounded bg-secondary hover:bg-secondary-dark text-white transition duration-300"> Next Song</button>
     </div>
-    <div id="result" class="text-xl mb-6 text-center"></div>
+    <div id="result" class="text-2xl font-bold mb-6 text-center"></div>
   </div>
 
   <!-- SCOREBOARD -->
   <div class="spreadsheet-container bg-primary bg-opacity-20 rounded-lg p-8 shadow-xl border-solid border-2 border-primary">
 
     <div class="scoreboard-header flex justify-between items-center mb-6 border-b-2 border-primary pb-6">
-      <h2 class="text-3xl font-semibold title">Scoreboard</h2>
-      <button id="settingsButton" class="text-2xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">⚙️</button>
+      <h2 class="text-2xl lg:text-3xl font-bold title">Puntuaciones</h2>
+      <button id="settingsButton" class="text-4xl lg:text-2xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">⚙️</button>
+      <button id="mockdata" class="hidden lg:flex text-5xl lg:text-2xl bg-transparent hover:bg-primary hover:text-white rounded-full p-2 transition duration-300">🧪</button>
     </div>
 
     <div id="playerGuesses" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8"></div>
 
-    <div class="overflow-x-auto">
-      <table id="scoreTable" class="w-full h-72 overflow-hidden block border-collapse border border-primary">
-        <thead class="block">
+    <div class="">
+      <table id="scoreTable" class="no-scrollbar overflow-y-auto w-full h-72 block border-collapse border border-primary">
+        <thead class="block sticky top-0">
           <tr class="bg-primary bg-opacity-20 flex w-full border-b border-primary">
-            <th class="p-3 text-center flex-[2] border-r border-primary">Canción</th>
-            <th class="p-3 text-center flex-1 border-r border-primary">Jugador</th>
-            <th class="p-3 text-center flex-[0.5] border-r border-primary">Resp.</th>
-            <th class="p-3 text-center flex-[0.5]">Puntos</th>
+            <th class="font-medium p-3 text-center flex-[2] border-r border-primary">Canción</th>
+            <th class="font-medium p-3 text-center flex-1 border-r border-primary">Jugador</th>
+            <th class="font-medium p-3 text-center hidden lg:table-cell flex-[0.5] border-r border-primary">Resp.</th>
+            <th class="font-medium p-3 text-center flex-1 lg:flex-[0.5]">Puntos</th>
           </tr>
         </thead>
-        <tbody class="block h-full overflow-y-auto">
-          <!-- More rows as needed -->
+        <tbody class="block h-full">
+            <!-- More rows as needed -->
         </tbody>
       </table>
     </div>
 
-    <!-- Sum points per player -->
-    <!-- <div class="flex flex-wrap justify-center mt-8">
-      <div class="flex items-center m-6">
-        <span class="text-2xl">🐸</span>
-        <span class="text-xl font-semibold mx-2">Sergio</span>
-        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
-      </div>
-      <div class="flex items-center m-6">
-        <span class="text-2xl">🐸</span>
-        <span class="text-xl font-semibold mx-2">Sergio</span>
-        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
-      </div>
-      <div class="flex items-center m-6">
-        <span class="text-2xl">🐸</span>
-        <span class="text-xl font-semibold mx-2">Sergio</span>
-        <span class="text-xl font-bold bg-emerald-500 px-3 rounded">10</span>
-      </div>
-    </div> -->
-
+    <div id="playerTotals" class="flex flex-wrap justify-center mt-8"></div>
 
   </div>
 
   <!-- PLAYERS MENU -->
   <div id="playerSettings" class="modal hidden fixed inset-0 bg-black bg-opacity-50 overflow-y-auto h-full w-full flex items-center justify-center">
     <div class="modal-content p-8 rounded-lg shadow-xl max-w-md mx-auto mt-20 bg-primary bg-opacity-20 backdrop-filter backdrop-blur-lg border-solid border-2 border-primary">
-      <h2 class="text-2xl font-semibold mb-4">Player Settings</h2>
-      <div id="playerList" class="mb-4"></div>
+
+      <div class="flex flex-row mb-6 border-b-2 border-primary">
+        <h2 class="text-2xl lg:text-3xl font-bold title mb-4">Jugadores</h2>
+        <button id="closeSettings" class="text-xl ml-auto mb-4">❌</button>
+      </div>
+      
+      <div id="playerList" class="mb-8"></div>
       <div class="flex justify-between">
         <input type="text" id="newPlayerName" placeholder="Nombre del jugador" class="flex-1 mr-2 p-2 mr-2 rounded bg-gray-700 text-white">
-        <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Add</button>
-        <button id="closeSettings" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-4 ml-2 rounded transition duration-300">Close</button>
+        <button id="addPlayer" class="bg-secondary hover:bg-secondary-dark text-white font-bold py-2 px-4 rounded transition duration-300">Añadir</button>
       </div>
     </div>
   </div>
@@ -98,11 +85,12 @@ import { songs } from '../data/songs.js';
 
   function loadRandomSong() {
     currentSong = songs[Math.floor(Math.random() * songs.length)];
-    document.getElementById('songInfo').innerHTML = `<b>${currentSong.title}</b> <span class="text-gray-400"> — </span> <b>${currentSong.artist}</b>`;
+    document.getElementById('songInfo').innerHTML = `<b>${currentSong.title}</b> <span class="text-white text-opacity-30"> — </span> <b>${currentSong.artist}</b>`;
     document.getElementById('audioPlayer').src = currentSong.audio;
     document.getElementById('result').textContent = '';
     document.getElementById('showDateButton').disabled = false;
     updatePlayerGuesses();
+    updatePlayerTotalList();
   }
 
   function updatePlayerGuesses() {
@@ -110,14 +98,14 @@ import { songs } from '../data/songs.js';
     playerGuessesDiv.innerHTML = '';
     players.forEach((player, index) => {
       playerGuessesDiv.innerHTML += `
-        <div class="player-guess p-4 rounded-lg">
-          <div class="player-info flex items-center mb-2">
-            <span class="player-avatar text-3xl mr-2">${player.avatar}</span>
-            <span class="player-name text-xl font-semibold">${player.name}</span>
+        <div class="player-guess pb-4 rounded-lg">
+          <div class="player-info flex items-center lg:mb-2">
+            <span class="player-avatar text-4xl mb-2 lg:mb-0 lg:text-3xl mr-3">${player.avatar}</span>
+            <span class="player-name text-xl mb-2 lg:mb-0 lg:text-xl font-medium">${player.name}:</span>
           </div>
           <div class="guess-input flex">
-            <input type="number" id="guess-${index}" placeholder="XXXX" min="1900" max="2023" class="flex-1 mr-2 p-2 rounded bg-gray-700 text-white">
-            <button onclick="submitGuess(${index})" class="bg-primary hover:bg-primary-dark text-white font-bold p-2 rounded transition duration-300">
+            <input type="number" id="guess-${index}" placeholder="XXXX" min="1900" max="2023" class=" text-center text-2xl lg:text-base flex-1 mr-2 p-1 rounded bg-gray-700 text-white">
+            <button id="guess-submit-${index}" onclick="submitGuess(${index})" class="text-center text-2xl lg:text-base px-3 py-2 bg-primary hover:bg-primary-dark text-white font-bold  rounded transition duration-300">
             
               <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
@@ -132,10 +120,13 @@ import { songs } from '../data/songs.js';
 
   function submitGuess(playerIndex) {
     const guessInput = document.getElementById(`guess-${playerIndex}`);
+    const guessSubmit = document.getElementById(`guess-submit-${playerIndex}`);
     const guess = parseInt(guessInput.value);
     if (guess) {
       updateScoreboard(players[playerIndex], guess);
+      updateScoreboardTotals();
       guessInput.disabled = true;
+      guessSubmit.disabled = true;
       if (players.every(p => document.getElementById(`guess-${players.indexOf(p)}`).disabled)) {
         document.getElementById('showDateButton').click();
       }
@@ -153,10 +144,10 @@ import { songs } from '../data/songs.js';
     const newRow = document.createElement('tr');
     newRow.className = 'flex w-full border-b border-primary';
     newRow.innerHTML = `
-      <td class="p-3 text-left flex-[2] border-r border-primary">${currentSong.title.length > 25 ? currentSong.title.substring(0, 25) + '...' : currentSong.title}</td>
+      <td class="p-3 text-left flex-[2] border-r border-primary">${currentSong.title.length > 30 ? currentSong.title.substring(0, 30) + '...' : currentSong.title}</td>
       <td class="p-3 text-center flex-1 border-r border-primary">${player.avatar} ${player.name}</td>
-      <td class="p-3 text-center flex-[0.5] border-r border-primary">${guess}</td>
-      <td class="p-3 text-center flex-[0.5]">${points}</td>
+      <td class="p-3 text-center hidden lg:table-cell flex-[0.5] border-r border-primary">${guess}</td>
+      <td class="p-3 text-center flex-1 lg:flex-[0.5]">${points}</td>
     `;
 
     // Prepend the new row to the tbody
@@ -167,8 +158,44 @@ import { songs } from '../data/songs.js';
     }
   }
 
+  function updateScoreboardTotals() {
+    const playerTotals = document.getElementById('playerTotals');
+    playerTotals.innerHTML = '';
+    players.forEach(player => {
+      playerTotals.innerHTML += `
+        <div class="flex items-center m-6">
+          <span class="text-2xl">${player.avatar}</span>
+          <span class="text-xl font-semibold mx-2">${player.name}</span>
+          <span class="text-xl font-bold bg-emerald-500 px-3 rounded">${player.totalPoints}</span>
+        </div>
+      `;
+    });
+  }
+
+  function mock_data() {
+    // Insert 30 rows of mock data into the table
+    const tbody = document.querySelector('#scoreTable tbody');
+    for (let i = 0; i < 30; i++) {
+      const newRow = document.createElement('tr');
+      newRow.className = 'flex w-full border-b border-primary';
+      newRow.innerHTML = `
+        <td class="p-3 text-left flex-[2] border-r border-primary">Canción ${i + 1}</td>
+        <td class="p-3 text-center flex-1 border-r border-primary">Jugador ${i + 1}</td>
+        <td class="p-3 text-center hidden lg:table-cell flex-[0.5] border-r border-primary">${Math.floor(Math.random() * 100)}</td>
+        <td class="p-3 text-center flex-1 lg:flex-[0.5]">${Math.floor(Math.random() * 5)}</td>
+      `;
+      tbody.appendChild(newRow);
+    }
+  }
+
+  document.getElementById('mockdata').addEventListener('click', () => {
+    mock_data();
+  });
+
   document.getElementById('showDateButton').addEventListener('click', () => {
-    document.getElementById('result').textContent = `This song was released in ${currentSong.year}.`;
+    document.getElementById('result').innerHTML = `La canción fué publicada en 
+    <span class="text-4xl bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">${currentSong.year}</span>
+    `;
     document.getElementById('showDateButton').disabled = true;
   });
 
@@ -203,9 +230,27 @@ import { songs } from '../data/songs.js';
     playerList.innerHTML = '';
     players.forEach((player, index) => {
       playerList.innerHTML += `
-        <div class="flex justify-between items-center mb-2">
-          <span>${player.avatar} ${player.name}</span>
-          <button onclick="removePlayer(${index})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded text-sm transition duration-300">Remove</button>
+        <div class="flex justify-between items-center my-2 mx-8">
+          <div class="flex items-center">
+            <span class="text-2xl mr-2">${player.avatar}</span>
+            <span class="text-lg">${player.name}</span>
+          </div>
+          <button onclick="removePlayer(${index})" class="bg-red-500 hover:bg-red-600 text-white font-bold py-1 px-2 rounded transition duration-300">Borrar</button>
+        </div>
+      `;
+    });
+    updatePlayerTotalList();
+  }
+
+  function updatePlayerTotalList() {
+    const playerTotals = document.getElementById('playerTotals');
+    playerTotals.innerHTML = '';
+    players.forEach(player => {
+      playerTotals.innerHTML += `
+        <div class="flex items-center m-6">
+          <span class="text-2xl">${player.avatar}</span>
+          <span class="text-xl font-semibold mx-2">${player.name}</span>
+          <span class="text-xl font-bold bg-emerald-500 px-3 rounded">${player.totalPoints}</span>
         </div>
       `;
     });
@@ -214,6 +259,7 @@ import { songs } from '../data/songs.js';
   window.removePlayer = (index) => {
     players.splice(index, 1);
     updatePlayerList();
+    updatePlayerTotalList();
   };
 
   window.submitGuess = submitGuess;
